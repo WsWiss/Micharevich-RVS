@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: RVS-05
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: products
+      POSTGRES_USER: vbylov
+      POSTGRES_PASSWORD: vbylov
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  pgdata:
